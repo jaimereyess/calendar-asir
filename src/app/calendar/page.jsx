@@ -1,9 +1,8 @@
 "use client"
 import React, { useState } from "react";
-import "./app.css"
+import "./app.css";
 import renderWeekdays from "@/components/render-weekdays";
 import CalendarModal from "@/components/day-modal";
-
 
 function App() {
     const [sDate, setsDate] = useState(new Date());

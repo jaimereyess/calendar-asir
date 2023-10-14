@@ -6,6 +6,7 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import "@/app/calendar/app.css"
+import Link from 'next/link';
 
 const style = {
     position: 'absolute',
@@ -46,9 +47,11 @@ export default function TransitionsModal({ day, month }) {
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             {day} de {month}
                         </Typography>
-                        <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                        <Typography id="transition-modal-description p-2" sx={{ mt: 2 }}>
                             No hay tareas pendientes
                         </Typography>
+                        <Link href="/new" className="mt-10 bg-blue-500 rounded-lg hover-blue-600 cursor-pointer py-2 px-3">Crear nueva actividad</Link>
+
                     </Box>
                 </Fade>
             </Modal>
