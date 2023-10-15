@@ -7,14 +7,21 @@ export async function loadActivities() {
     return data
 }
 
+
 async function Activitiespage() {
     const activities = await loadActivities()
+
+    const today = new Date();
+    const activitiesDate = new Date(activities[0].date_limit);
+    const isOnTime = today > activitiesDate;
+
 
     return (
         <main>
             <div className='grid gap-4 grid-cols-4'>
                 {activities.map(activity => (
-                    <ActivityCard activity={activity} key={activity.id} />
+                    <ActivityCard activity={activity} key={activity.id} onTime={today < activity.date_limit} />
+
                 ))}
 
                 <section className='flex items-center justify-center'>

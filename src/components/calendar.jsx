@@ -1,18 +1,12 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./calendar.css";
 import renderWeekdays from "@/components/render-weekdays";
 import CalendarModal from "@/components/day-modal";
 import { format } from "date-fns"
-import EventLoader from "./event-loader";
 
 function Calendar() {
     const [sDate, setsDate] = useState(new Date());
-    const [events, setEvents] = useState([]);
-
-    const onDataLoaded = (loadedEvents) => {
-        setEvents(loadedEvents);
-    };
 
     const findMonthDays = (y, m) => {
         return new Date(y, m + 1, 0).getDate();
@@ -64,13 +58,11 @@ function Calendar() {
             const isSelected = sDate && date.toDateString() === sDate.toDateString();
             const formattedDate = format(date, 'yyyy-MM-dd');
 
-            const hasEvent = events.some((event) => event.date === formattedDate);
-
             allDays.push(
                 <div
                     key={`d-${d}`}
-                    // className={`${isSelected ? "bg-green-600 text-white" : hasEvent ? "bg-green-200" : "bg-[#f0f0f0] hover:bg-green-200"} box`}
-                    className={`${isSelected ? "bg-green-600 text-white" : hasEvent ? "bg-green-200" : "bg-[#f0f0f0] hover:bg-green-200"} box`}
+                    className={`${isSelected ? "bg-green-600 text-white" : "bg-[#f0f0f0] hover:bg-green-200"} box`}
+
                     onClick={() => handleDateClick(date)}
                 >
                     <CalendarModal
@@ -89,8 +81,6 @@ function Calendar() {
 
     return (
         <main>
-            <EventLoader onDataLoaded={onDataLoaded} />
-            {console.log(onDataLoaded)}
             <div className="main w-sccreen mt-10 p-8">
                 <div className="header">
                     <button
