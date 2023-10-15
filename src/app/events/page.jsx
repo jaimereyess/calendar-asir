@@ -2,7 +2,7 @@ import axios from 'axios'
 import ActivityCard from '@/components/activity-card'
 import Link from 'next/link'
 
-async function loadActivities() {
+export async function loadActivities() {
     const { data } = await axios.get('http://localhost:3000/api/events')
     return data
 }

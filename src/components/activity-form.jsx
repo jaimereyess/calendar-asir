@@ -41,94 +41,103 @@ function ActivityForm() {
         if (params.id) {
             axios.get('/api/events/' + params.id)
                 .then(res => {
+                    const modifiedDateLimit = res.data.date_limit.split('T')[0];
                     setActivity({
                         name: res.data.name,
                         subject: res.data.subject,
-                        date_limit: res.data.date_limit,
+                        date_limit: modifiedDateLimit,
                         moodle: res.data.moodle,
                         drive: res.data.drive
-                    })
-                })
+                    });
+                });
         }
-    }, [])
+    }, []);
 
     return (
-        < form className='bg-white text-black shadow-md rounded-md px-8 pt-6 pb-8 mb-4'
-            onSubmit={handleSumbit} ref={form}
-        >
-            <label htmlFor="name"
-                className='block text-gray-700 text-sm font-bold mb-2'>
-                Nombre de la actividad</label>
-            <input
-                name="name"
-                type="text"
-                placeholder="Actividad"
-                onChange={handleChange}
-                value={activity.name}
-                className='shadow appearance-none border rounded w-full p-2 px-3'
-                autoFocus />
+        <section className='flex justify-center bg-white text-black h-screen pt-10 w-screen'>
+
+            < form
+                onSubmit={handleSumbit} ref={form}
+            >
+                <label htmlFor="name"
+                    className='block text-gray-700 font-bold mb-2 text-2xl'>
+                    Nombre de la actividad
+                    <span className='text-red-600'>*</span>
+                </label>
+                <input
+                    name="name"
+                    type="text"
+                    placeholder="Actividad"
+                    onChange={handleChange}
+                    value={activity.name}
+                    className='shadow appearance-none border rounded p-2 px-3 w-full'
+                    autoFocus />
 
 
-            <label htmlFor="subject"
-                className='block text-gray-700 text-sm font-bold mb-2'>
-                Asignatura</label>
+                <label htmlFor="subject"
+                    className='block text-gray-700 text-2xl font-bold mb-2 mt-5'>
+                    Asignatura
+                    <span className='text-red-600'>*</span>
+                </label>
+                <select
+                    className='shadow appearance-none border rounded p-2 w-full'
+                    name="subject"
+                    placeholder="Asignatura"
+                    onChange={handleChange}
+                    value={activity.subject}>
+                    <option value="Administración de sistemas gestores de bases de datos">Administración de sistemas gestores de bases de datos</option>
+                    <option value="Administración de sistemas operativos">Administración de sistemas operativos</option>
+                    <option value="Implantación de aplicaciones web">Implantación de aplicaciones web</option>
+                    <option value="Seguridad y alta disponibilidad">Seguridad y alta disponibilidad</option>
+                    <option value="Servicios de red e internet">Servicios de red e internet</option>
+                    <option value="Empresa e iniciativa emprendedora">Empresa e iniciativa emprendedora</option>
+                </select>
 
-            <select
-                name="subject"
-                type="submit"
-                placeholder="Asignatura"
-                onChange={handleChange}
-                value={activity.subject}>
-                <option value="Administración de sistemas gestores de bases de datos">Administración de sistemas gestores de bases de datos</option>
-                <option value="Administración de sistemas operativos">Administración de sistemas operativos</option>
-                <option value="Implantación de aplicaciones web">Implantación de aplicaciones web</option>
-                <option value="Seguridad y alta disponibilidad">Seguridad y alta disponibilidad</option>
-                <option value="Servicios de red e internet">Servicios de red e internet</option>
-                <option value="Empresa e iniciativa emprendedora">Empresa e iniciativa emprendedora</option>
-            </select>
 
+                <label htmlFor="date_limit"
+                    className='block text-gray-700 text-2xl font-bold mb-2 mt-5'>
+                    Fecha
+                    <span className='text-red-600'>*</span>
+                </label>
+                <input
+                    name="date_limit"
+                    type="text"
+                    placeholder="YYYY-MM-DD"
+                    onChange={handleChange}
+                    value={activity.date_limit}
+                    className='shadow appearance-none border rounded p-2 w-full'
+                />
 
-            <label htmlFor="date_limit"
-                className='block text-gray-700 text-sm font-bold mb-2'>
-                Fecha</label>
-            <input
-                name="date_limit"
-                type="text"
-                placeholder="YYYY-MM-DD"
-                onChange={handleChange}
-                value={activity.date_limit}
-                className='shadow appearance-none border rounded w-full p-2 px-3'
-            />
+                <label htmlFor="moodle"
+                    className='block text-gray-700 text-2xl font-bold mb-2 mt-5'>
+                    Moodle</label>
+                <textarea
+                    name="moodle"
+                    type="text"
+                    placeholder="Moodle"
+                    onChange={handleChange}
+                    value={activity.moodle}
+                    className='shadow appearance-none border rounded p-2 resize-none w-full'
+                />
 
-            <label htmlFor="moodle"
-                className='block text-gray-700 text-sm font-bold mb-2'>
-                Moodle</label>
-            <textarea
-                name="moodle"
-                type="text"
-                placeholder="Moodle"
-                onChange={handleChange}
-                value={activity.moodle}
-                className='shadow appearance-none border rounded w-full p-2 px-3 resize-none'
-            />
+                <label htmlFor="drive"
+                    className='block text-gray-700 text-2xl font-bold mb-2 mt-5'>
+                    Drive</label>
+                <textarea
+                    name="drive"
+                    type="text"
+                    placeholder="Drive"
+                    onChange={handleChange}
+                    value={activity.drive}
+                    className='shadow appearance-none border rounded p-2 resize-none w-full'
+                />
 
-            <label htmlFor="drive"
-                className='block text-gray-700 text-sm font-bold mb-2'>
-                Drive</label>
-            <textarea
-                name="drive"
-                type="text"
-                placeholder="Drive"
-                onChange={handleChange}
-                value={activity.drive}
-                className='shadow appearance-none border rounded w-full p-2 px-3 resize-none'
-            />
+                <button className='bg-blue-300 rounded-md hover:bg-blue-400 p-2 mt-4 font-bold w-full '>
+                    {params.id ? "Update Activity" : "Create Activity"}
+                </button>
 
-            <button className='bg-blue-300 rounded-md hover:bg-blue-400 p-2 mt-4 font-bold '>
-                {params.id ? "Update Activity" : "Create Activity"}
-            </button>
-
-        </form >
+            </form >
+        </section>
     )
 }
 
