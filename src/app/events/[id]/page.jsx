@@ -23,7 +23,6 @@ async function ActivityPage({ params }) {
                 <Buttons activityId={activity.id} />
             </div >
         </section >
-
     )
 }
 

@@ -56,7 +56,7 @@ function Calendar() {
         for (let d = 1; d <= mDays; d++) {
             const date = new Date(y, m, d);
             const isSelected = sDate && date.toDateString() === sDate.toDateString();
-            const formattedDate = format(date, 'yyyy-MM-dd');
+            const formattedDate = format(sDate, 'yyyy-MM-dd');
 
             allDays.push(
                 <div

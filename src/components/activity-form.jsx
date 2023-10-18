@@ -133,7 +133,7 @@ function ActivityForm() {
                 />
 
                 <button className='bg-blue-300 rounded-md hover:bg-blue-400 p-2 mt-4 font-bold w-full '>
-                    {params.id ? "Update Activity" : "Create Activity"}
+                    {params.id ? "Actualizar actividad" : "Crear Actividad"}
                 </button>
 
             </form >

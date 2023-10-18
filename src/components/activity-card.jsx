@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { format } from 'date-fns';
 
 function ActivityCard({ activity }) {
 
@@ -6,6 +7,7 @@ function ActivityCard({ activity }) {
     const activitiesDate = new Date(activity.date_limit);
     const isOnTime = today < activitiesDate;
     const onTime = isOnTime ? "" : "ATRASADA";
+    const formattedDate = format(activitiesDate, 'yyyy-MM-dd');
 
     return (
         <Link
@@ -15,7 +17,7 @@ function ActivityCard({ activity }) {
                 ${isOnTime ? "bg-white" : "bg-red-300 hover:bg-red-400"}`} >
             <h1 className='text-lg font-bold'>{activity.name}</h1>
             <h2 className='text-2xl text-slate-600'>{activity.subject}</h2>
-            <p>{activity.date_limit.split("T")[0]}</p>
+            <p>{formattedDate}</p>
             <p>{activity.moodle}</p>
             <p>{activity.drive}</p>
             <span className='flex items-center justify-center font-bold'>{onTime}</span>
