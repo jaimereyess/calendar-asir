@@ -1,12 +1,15 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./calendar.css";
 import renderWeekdays from "@/components/render-weekdays";
 import CalendarModal from "@/components/day-modal";
 import { format } from "date-fns"
+import RenderEvents from "./render-events";
 
 function Calendar() {
     const [sDate, setsDate] = useState(new Date());
+
+    console.log(RenderEvents())
 
     const findMonthDays = (y, m) => {
         return new Date(y, m + 1, 0).getDate();
@@ -113,6 +116,7 @@ function Calendar() {
                     </div>
                 )}
             </div>
+            {RenderEvents()}
         </main>
     );
 }

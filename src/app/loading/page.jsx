@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react'
 
-function RenderEvents() {
+function Profile() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
 
@@ -26,4 +26,4 @@ function RenderEvents() {
     )
 }
 
-export default RenderEvents
+export default Profile
