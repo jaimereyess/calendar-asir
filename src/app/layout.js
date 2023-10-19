@@ -5,12 +5,12 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Calendar ASIR',
-  description: 'Calendar 2 ASIR',
+  description: 'Calendar 2 ASIR'
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout ({ children }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={inter.className}>{children}</body>
     </html>
   )
