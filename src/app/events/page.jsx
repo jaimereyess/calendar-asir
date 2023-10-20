@@ -17,6 +17,7 @@ async function Activitiespage () {
     <main>
       <div className='grid gap-4 grid-cols-4'>
         {sortedActivities.map(activity => (
+          <h1>{activity.date_limit.toString().split("T")[0]</h1>
           <ActivityCard activity={activity} key={activity.id} onTime={today < activity.date_limit} />
         ))}
 
