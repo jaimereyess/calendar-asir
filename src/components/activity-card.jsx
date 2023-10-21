@@ -12,10 +12,9 @@ function ActivityCard({ activity }) {
   return (
     <Link
       href={`/events/${activity.id}`}
-      className={`rounded-xl-lg border-gray-800 mb-3 text-black p-4
-                text-center hover:bg-gray-100 hover:cursor-pointer
-                ${submitted ? 'bg-green-200' : ""}
-                ${isOnTime ? 'bg-white' : 'bg-red-300 hover:bg-red-400'}`}
+      className={`rounded-xl-lg border-gray-800 mb-3 text-black p-4 text-center hover:bg-gray-100 hover:cursor-pointer
+            ${submitted ? 'bg-green-300 hover:bg-green-400' : (isOnTime ? 'bg-white' : 'bg-red-300 hover:bg-red-400')}`}
+
     >
       <h1 className='text-lg font-bold'>{activity.name}</h1>
       <h2 className='text-2xl text-slate-600'>{activity.subject}</h2>
