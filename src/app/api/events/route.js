@@ -27,7 +27,8 @@ export async function POST (request) {
       subject,
       date_limit,
       moodle,
-      drive
+      drive,
+      submitted
     })
     console.log(result)
 
@@ -37,7 +38,8 @@ export async function POST (request) {
       subject,
       date_limit,
       moodle,
-      drive
+      drive,
+      submitted
     })
   } catch (error) {
     console.log(error)

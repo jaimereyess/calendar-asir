@@ -18,6 +18,7 @@ async function ActivityPage({ params }) {
           <p>Fecha: {activity.date_limit.split('T')[0]}</p>
           <p>Moodle: <a className='text-blue-400 underline' href={activity.moodle} target='_blank' rel='noreferrer'>Moodle</a></p>
           <p>Drive: <a className='text-blue-400 underline' href={activity.drive} target='_blank' rel='noreferrer'>Drive</a></p>
+          <p>Entregado: {activity.submitted}</p>
         </div>
         <Buttons activityId={activity.id} />
       </div>

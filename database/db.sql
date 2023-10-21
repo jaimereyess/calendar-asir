@@ -10,5 +10,6 @@ CREATE TABLE activities(
         'Empresa e iniciativa emprendedora' ) NOT NULL,
     date_limit DATE NOT NULL,
     moodle VARCHAR(255),
-    drive VARCHAR(255)
+    drive VARCHAR(255),
+    submitted ENUM('Si', 'No')
 );

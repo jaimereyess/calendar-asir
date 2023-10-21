@@ -2,12 +2,12 @@ import axios from 'axios'
 import ActivityCard from '@/components/activity-card'
 import Link from 'next/link'
 
-export async function loadActivities () {
+export async function loadActivities() {
   const { data } = await axios.get('http://localhost:3000/api/events')
   return data
 }
 
-async function Activitiespage () {
+async function Activitiespage() {
   const activities = await loadActivities()
 
   const today = new Date()
@@ -17,8 +17,8 @@ async function Activitiespage () {
     <main>
       <div className='grid gap-4 grid-cols-4'>
         {sortedActivities.map(activity => (
-          <h1>{activity.date_limit.toString().split("T")[0]</h1>
-          <ActivityCard activity={activity} key={activity.id} onTime={today < activity.date_limit} />
+          <ActivityCard activity={activity} key={activity.id}
+            onTime={today < activity.date_limit} submitted={activity.submitted} />
         ))}
 
         <section className='flex items-center justify-center'>
