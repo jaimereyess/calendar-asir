@@ -1,12 +1,12 @@
 'use client'
-import React, { use, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './calendar.css'
 import renderWeekdays from '@/components/render-weekdays'
 import CalendarModal from '@/components/day-modal'
 import { format } from 'date-fns'
 import RenderEvents from './render-events'
 
-function Calendar () {
+function Calendar() {
   const [sDate, setsDate] = useState(new Date())
 
   const findMonthDays = (y, m) => {
@@ -38,6 +38,22 @@ function Calendar () {
     setsDate(date)
   }
 
+  function RenderEvents() {
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(true)
+
+    useEffect(() => {
+      fetch('/api/events')
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data)
+          setLoading(false)
+        })
+    }, [])
+
+    return data.map(activity => activity.date_limit.toString().split('T')[0])
+  }
+
   const showCalendar = () => {
     const y = sDate.getFullYear()
     const m = sDate.getMonth()
@@ -47,6 +63,26 @@ function Calendar () {
     const allDays = []
 
     allDays.push(renderWeekdays())
+
+    // Render events
+
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(true)
+
+    useEffect(() => {
+      fetch('/api/events')
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data)
+          setLoading(false)
+        })
+    }, [])
+
+    if (isLoading) return <p>Loading...</p>
+    if (!data) return <p>No profile data</p>
+
+    const datesArray = data.map(activity => activity.date_limit.toString().split('T')[0]);
+
 
     // For empty cells
     for (let p = 0; p < fDay; p++) {
@@ -59,28 +95,27 @@ function Calendar () {
       const isSelected = sDate && date.toDateString() === sDate.toDateString()
       const formattedDate = format(date, 'yyyy-MM-dd')
 
-      const eventDates = ['2023-10-10', '2023-10-05', '2023-10-20']
-      const dayEvent = eventDates.includes(formattedDate)
+      const dayEvent = datesArray.includes(formattedDate)
 
       allDays.push(
         <div
           key={`d-${d}`}
           className={`box ${isSelected
-                        ? 'bg-green-600 text-white'
-                        : dayEvent
-                            ? 'bg-orange-300 hover:bg-orange-400'
-                            : 'bg-[#f0f0f0] hover:bg-green-200'
-                        }`}
+            ? 'bg-green-600 text-white'
+            : dayEvent
+              ? 'bg-orange-300 hover:bg-orange-400'
+              : 'bg-[#f0f0f0] hover:bg-green-200'
+            }`}
 
           onClick={() => handleDateClick(date)}
         >
           <CalendarModal
             day={d}
             month={
-                            new Date(sDate.getFullYear(), sDate.getMonth()).toLocaleString('default', {
-                              month: 'long'
-                            })
-                        }
+              new Date(sDate.getFullYear(), sDate.getMonth()).toLocaleString('default', {
+                month: 'long'
+              })
+            }
           />
         </div>
       )
@@ -124,7 +159,6 @@ function Calendar () {
           </div>
         )}
       </div>
-      {RenderEvents()}
     </main>
   )
 }
