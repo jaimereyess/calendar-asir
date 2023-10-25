@@ -11,5 +11,5 @@ CREATE TABLE activities(
     date_limit DATE NOT NULL,
     moodle VARCHAR(255),
     drive VARCHAR(255),
-    submitted ENUM('Si', 'No')
+    submitted ENUM('Si', 'No')  DEFAULT 'No'
 );

@@ -4,7 +4,6 @@ import './calendar.css'
 import renderWeekdays from '@/components/render-weekdays'
 import CalendarModal from '@/components/day-modal'
 import { format } from 'date-fns'
-import RenderEvents from './render-events'
 
 function Calendar() {
   const [sDate, setsDate] = useState(new Date())
@@ -40,7 +39,7 @@ function Calendar() {
 
   function RenderEvents() {
     const [data, setData] = useState(null)
-    const [isLoading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
       fetch('/api/events')
@@ -65,23 +64,17 @@ function Calendar() {
     allDays.push(renderWeekdays())
 
     // Render events
-
     const [data, setData] = useState(null)
-    const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
       fetch('/api/events')
         .then((res) => res.json())
         .then((data) => {
           setData(data)
-          setLoading(false)
         })
     }, [])
 
-    if (isLoading) return <p>Loading...</p>
-    if (!data) return <p>No profile data</p>
-
-    const datesArray = data.map(activity => activity.date_limit.toString().split('T')[0]);
+    const datesArray = data ? data.map(activity => activity.date_limit.toString().split('T')[0]) : [];
 
 
     // For empty cells
