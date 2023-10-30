@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { conn } from '@/libs/mysql'
 
-export async function GET () {
+export async function GET() {
   try {
     const results = await conn.query('SELECT * FROM activities')
     return NextResponse.json(results)
@@ -18,9 +18,9 @@ export async function GET () {
   }
 }
 
-export async function POST (request) {
+export async function POST(request) {
   try {
-    const { name, subject, date_limit, moodle, drive } = await request.json()
+    const { name, subject, date_limit, moodle, drive, submitted } = await request.json()
 
     const result = await conn.query('INSERT INTO activities SET ?', {
       name,

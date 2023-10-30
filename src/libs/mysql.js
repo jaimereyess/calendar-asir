@@ -1,11 +1,11 @@
-const mysql = require('mysql2');
+import mysql from 'mysql2/promise';
 import fs from 'fs';
 
 const caCert = fs.readFileSync('/cacert.pem');
 const clientCert = fs.readFileSync('/cacert.pem');
 const clientKey = fs.readFileSync('/cacert.pem');
 
-export const conn = mysql.createConnection({
+const CONFIG = {
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
@@ -15,15 +15,6 @@ export const conn = mysql.createConnection({
     cert: clientCert,
     key: clientKey
   }
-});
+};
 
-async function connectToDatabase() {
-  try {
-    await conn.connect();
-    console.log('Connected');
-  } catch (error) {
-    console.error('Error connecting to MySQL database:', error);
-  }
-}
-
-export default connectToDatabase;
+export const conn = mysql.createConnection(CONFIG);

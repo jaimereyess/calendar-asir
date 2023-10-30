@@ -53,7 +53,7 @@ function Calendar() {
     return data.map(activity => activity.date_limit.toString().split('T')[0])
   }
 
-  const showCalendar = () => {
+  const ShowCalendar = () => {
     const y = sDate.getFullYear()
     const m = sDate.getMonth()
     const mDays = findMonthDays(y, m)
@@ -144,7 +144,7 @@ function Calendar() {
           </button>
         </div>
         <div className='grid grid-cols-7 gap-1'>
-          {showCalendar()}
+          {ShowCalendar()}
         </div>
         {sDate && (
           <div className='selected-date text-white'>
