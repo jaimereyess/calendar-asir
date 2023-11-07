@@ -15,7 +15,7 @@ async function Activitiespage() {
 
   return (
     <main>
-      <div className='grid gap-4 grid-cols-4'>
+      <div className='grid gap-4 grid-cols-4 m-5'>
         {sortedActivities.map(activity => (
           <ActivityCard activity={activity} key={activity.id}
             onTime={today < activity.date_limit} submitted={activity.submitted} />

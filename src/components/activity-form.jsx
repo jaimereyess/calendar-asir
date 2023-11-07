@@ -2,8 +2,9 @@
 import { useRef, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter, useParams } from 'next/navigation'
+import { selectedCalendar } from './selectCalendar'
 
-function ActivityForm () {
+function ActivityForm() {
   const [activity, setActivity] = useState({
     name: '',
     subject: '',
@@ -105,14 +106,7 @@ function ActivityForm () {
           Fecha
           <span className='text-red-600'>*</span>
         </label>
-        <input
-          name='date_limit'
-          type='text'
-          placeholder='YYYY-MM-DD'
-          onChange={handleChange}
-          value={activity.date_limit}
-          className='shadow appearance-none border rounded p-2 w-full'
-        />
+        <selectedCalendar />
 
         <label
           htmlFor='moodle'
