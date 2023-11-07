@@ -1,6 +1,7 @@
 'use client'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import UpdateBtn from './updateBtn'
 
 function Buttons({ activityId }) {
   const router = useRouter()
@@ -31,16 +32,7 @@ function Buttons({ activityId }) {
           Edit
         </button>
       </div>
-      <div className='flex gap-x-2 justify-around mt-2'>
-        <button
-          className='bg-blue-500 hover:bg-blue-700 py-2 px-3 rounded text-white w-full'
-          onClick={() => {
-            router.push(`/events/edit/${activityId}`)
-          }}
-        >
-          Entregar
-        </button>
-      </div>
+      <UpdateBtn params={{ id: activityId }} />
     </section>
 
   )
