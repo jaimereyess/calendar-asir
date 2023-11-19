@@ -20,7 +20,7 @@ async function ActivityPage({ params }) {
           <p>Drive: <a className='text-blue-400 underline' href={activity.drive} target='_blank' rel='noreferrer'>Drive</a></p>
           <p>Entregado: {activity.submitted}</p>
         </div>
-        <Buttons activityId={activity.id} />
+        <Buttons activityId={activity.id} submitted={activity.submitted} />
       </div>
     </section>
   )

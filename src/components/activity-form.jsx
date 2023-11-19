@@ -2,7 +2,6 @@
 import { useRef, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter, useParams } from 'next/navigation'
-import { selectedCalendar } from './selectCalendar'
 
 function ActivityForm() {
   const [activity, setActivity] = useState({
@@ -106,7 +105,6 @@ function ActivityForm() {
           Fecha
           <span className='text-red-600'>*</span>
         </label>
-        <selectedCalendar />
 
         <label
           htmlFor='moodle'
